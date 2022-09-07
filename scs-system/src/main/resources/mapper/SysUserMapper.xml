@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scs.system.mapper.SysUserMapper">
+    <update id="updateUserInfo">
+        update SYS_USER t
+        <set>
+            <if test="user.sex != null">
+                t.sex = #{user.sex, jdbcType=INTEGER},
+            </if>
+            <if test="user.address != null">
+                t.address = #{user.address, jdbcType=VARCHAR},
+            </if>
+            <if test="user.mail != null">
+                t.mail = #{user.mail, jdbcType=VARCHAR},
+            </if>
+        </set>
+        <where>
+            <if test="user.phoneNumber != null">
+                t.phone_number = #{user.phoneNumber, jdbcType=VARCHAR}
+            </if>
+        </where>
+    </update>
+
+    <select id="selectUserList" resultType="com.scs.common.core.domain.entity.SysUser">
+        select *
+        from SYS_USER u;
+    </select>
+
+    <select id="selectOne" resultType="com.scs.common.core.domain.entity.UserInfo">
+        select
+        t.phone_number as phone,
+        t.fullname,
+        t.password
+        from SYS_USER t
+        <where>
+            <if test="phone != ''">
+                t.phone_number = #{phone}
+            </if>
+        </where>
+    </select>
+
+</mapper>

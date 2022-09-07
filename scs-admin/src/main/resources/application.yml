@@ -1,0 +1,53 @@
+server:
+  port: 60002
+  servlet:
+    context-path: /
+
+# 应用名称
+spring:
+  application:
+    name: scs-admin
+
+  main:
+    allow-bean-definition-overriding: true #当遇到同样名字的时候，是否允许覆盖注册
+
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/scs?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      maximum-pool-size: 100
+      minimum-idle: 10
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    object-wrapper-factory: com.baomidou.mybatisplus.extension.MybatisMapWrapperFactory
+    call-setters-on-nulls: true
+
+redis:
+  database: 0
+  host: 127.0.0.1
+  port: 6379
+  # 有密码填密码，没有密码不填
+  password:
+  # 连接超时时间（ms)
+  timeout: 1000ms
+  # 高版本springboot中使用jedis或者lettuce
+  jedis:
+    pool:
+      # 连接池最大连接数（负值表示无限制）
+      max-active: 8
+      # 连接池最大阻塞等待时间（负值无限制)
+      max-wait: 5000ms
+      # 最大空闲链接数
+      max-idle: 8
+      # 最小空闲链接数
+      min-idle: 0
+
+
